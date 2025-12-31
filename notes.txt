@@ -1,1 +1,473 @@
+15th Dec 2025
+=============
 
+    -> AWS - Amazon Web Services 
+
+        -> Cloud Computing 
+
+            -> Application has data 
+
+                -> Data is in server (database,web, file storage etc )
+
+                    -> Server 
+
+                        -> Server is an machine where, Applications run 
+
+                        -> Server is a computer system, that takes a request
+                            and sends response 
+
+                    -> Where is this Server ? 
+
+                        -> Servers are hosted in Datacenters 
+
+    -> Data Center 
+
+        -> A data center is a building, a dedicated space within a building, 
+        or a group of buildings used to house computer systems and 
+        associated components, such as telecommunications and storage systems.
+
+    -> Physical Data Centers are Expensive & Hard To Maintain 
+
+    -> Cloud Computing
+    
+        -> ‘The Cloud’ can also refer to Cloud computing is the 
+        "on-demand" availability of compute power, database storage, 
+        applications, and other IT resources through a cloud services platform 
+        (AWS/AZURE/GCP/Oracle etc) via the "internet" with "pay-as-you-go" pricing.
+
+        -> Cloud Computing is comparable to Online Ride Services 
+
+    -> Cloud Offerings
+
+        -> Infrastructure As A Service - IAAS 
+
+            -> Hardware (2 cpu - 4 GB ram - 500 GB SSD)
+
+        -> Platform As A Service - PAAS 
+
+            -> Database Platform (MySQL Database, NoSQL Database, Java Application Platform)
+
+        -> Software As A Service - SAAS 
+
+            -> Direct Softwares (subscribe and pay)
+
+        -> NOTE: Compare them to Online Ride Services like 
+                    Uber: Bikes, Cars, Autos etc 
+
+
+16th Dec 2025
+=============
+
+    -> Traditional Approach (Setting Up Application Infrastructure On Physical Datacenters)
+
+        -> Amazon Ecommerce Application 
+
+            -> Servers 
+                +
+            -> Storage 
+                +
+            -> Databases 
+                +
+            -> Networking 
+                +
+            -> Security 
+                +
+            -> etc 
+
+    -> New Approach (Setting Up Application Infrastructure On Cloud Datacenters (AWS))
+
+        -> Amazon Ecommerce Application 
+
+            -> Servers      -   AWS EC2
+                +                  +
+            -> Storage      -   AWS S3 
+                +                  +
+            -> Databases    -   AWS RDS        ======>    Application
+                +                  +
+            -> Networking   -   AWS VPC 
+                +                  +
+            -> Security     -   AWS IAM
+                +                  +
+            -> etc          -   AWS etc 
+
+
+    -> Application should have following characteristics (Four Pillars Of Cloud)
+
+        -> Highly Available 
+
+            -> High availability in AWS ensures that applications are 
+                continuously accessible and operational
+
+        -> Fault Tolerant 
+
+            -> Fault tolerance in AWS refers to the ability of a system to 
+                continue operating without interruption in the face of hardware failures
+
+        -> Secured 
+
+            -> Security in AWS refers to the measures taken to protect cloud resources, 
+                data, and applications from unauthorized access.
+
+        -> Scalable  
+
+            -> Scalability in AWS refers to the ability of a system to handle 
+                increasing workloads and accommodate growing demands. 
+
+
+    -> Infrastructure As A Service - IAAS 
+
+        -> AWS Global Infrastructure 
+
+            -> Amazon Cloud Computing resources (servers, storage, databases etc) 
+            are available across the world. 
+            In simple terms if we see this https://aws.amazon.com/about-aws/global-infrastructure/ 
+            then Amazon Data Centers are available in different geographical locations.
+
+        -> In terms of AWS, infrastructure is made up of 
+
+            -> Regions 
+
+            -> Availability Zones 
+
+            -> Edge locations
+
+        -> Regions
+
+            -> Regions are designed to service AWS customers (or your users) 
+                that are located closest to a region.
+
+            -> Availability of Services are different for different AWS Regions.
+
+            -> Price varies from region to region
+
+17th Dec 2025
+=============
+
+    -> Availability zone (AZ)
+
+        -> Availability zone is where the actual data centers are located
+
+        -> Within a Region, there can be multiple Availability zones
+
+        -> Each AZ has independent Power Supply, Networking, Cooling System, Physical Security.
+
+        -> https://www.researchgate.net/profile/Ivan_Beres/publication/360541079/figure/fig1/AS:1154856056291328@1652350548135/AWS-Regions-and-Availability-Zones-Scott-nd.ppm
+
+    
+    -> Edge locations
+
+        -> An AWS Edge Location is a data center in the AWS global network used by services 
+        like CloudFront, Global Accelerator, and Lambda@Edge to store cached content 
+        (images, videos) and process requests closer to end-users, 
+        drastically reducing latency by serving data from the nearest point of presence(pop) 
+        rather than a distant main AWS Region. 
+        They act as caching warehouses, improving performance for websites.
+
+    -> VPC (Virtual Private Cloud)
+
+        -> A Virtual Private Cloud is a secure, isolated private cloud hosted 
+        within a public cloud. 
+
+        -> VPC customers can run code, store data, host websites & applications in isolated mode
+
+        -> NOTE: Having VPC is similar to having your own data center inside AWS. 
+
+        -> VPC is a service that lets customers(IBM) provision a logically isolated 
+        section of the AWS Cloud where you can launch AWS resources(Servers) 
+        in a VIRTUAL NETWORK that you define.
+
+
+18th Dec 2025
+=============
+
+    -> VPC Architecture Reference 
+
+        -> https://media.licdn.com/dms/image/v2/D4D12AQFI8sqvP4xFFQ/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1700537758681?e=2147483647&v=beta&t=zE97TFGw5FQJEjUksqx7SohNsqqV57-IYQ_pj7K2M2U
+
+    -> VPC components
+
+        -> Internet Gateway (Gate For Building)
+
+            -> An Internet Gateway must be attached to a VPC if the resources inside the VPC 
+                need to connect to resources via the open internet.
+
+        -> Subnets (Floors In Building)
+
+            -> A subnet or sub network is an logical subdivision of an Amazon Virtual Private Cloud (VPC)
+
+        -> Route Tables (Lift In Building)
+
+            -> A route table contains a set of rules called routes, 
+                that are used to determine where network traffic is directed.
+
+        -> Network Access Control List - NACL (Watchman For Floor)
+
+            -> subnet-level firewall that acts as an optional security layer 
+
+        -> Security Group (Watchman For Flat)
+
+            -> server-level firewall which is mandatory 
+
+19th Dec 2025
+=============
+
+    -> VPC Workflow 
+
+        -> "To enable access to or from the internet to an instance(server) in a VPC subnet, 
+        you must attach an Internet gateway to your VPC, 
+        ensure that your subnet route table points to the Internet gateway and 
+        ensure that instance has a public IP address, 
+        and ensure that your network access control and security group rules 
+        allow the relevant traffic to your instance" -- AWS
+
+20th Dec 2025
+=============
+
+    -> VPC Workflow & Components Demo
+
+        -> Detach Internet Gateway 
+
+            -> Proceeding with this action will detach the internet gateway from VPC. 
+            If you detach the internet gateway, resources in the VPC 
+            cannot communicate with the internet. 
+        
+        -> Attach Internet Gateway 
+
+            -> Attach an internet gateway to a VPC to enable the VPC to communicate with the internet. 
+
+        -> Route Table & Subnet 
+
+            -> RT connects to subnet and shows the network path 
+
+            -> Inside RT We have routes 
+
+                -> local - within vpc 
+                -> internet route - outside vpc (removed)
+
+                -> Adding back a proper route i.e internet route, will fix issue 
+
+        -> NACL - Network Access Control List 
+
+            -> Firewall on Subnet Level, allows all traffic 
+
+            -> Let's modify NACL to block all traffic and verify connectivity 
+
+                -> Select Instance -> Select Subnet -> Select NACL 
+
+        -> Security Group 
+
+            -> Firewall on Instance / Server Level
+
+            -> Let's modify Security Group to block traffic 
+
+            -> Select Instance -> Select Security -> Select Security group 
+
+            -> Delete SSH Rule (This security group has no inbound rules)
+
+            -> Add SSH Rule back and test connectivity
+
+
+22nd Dec 2025
+=============
+
+    -> Subnet Reserved IP's 
+
+    -> Web Subnet 10.0.0.0 - 10.0.15.255
+        10.0.0.0: Network address.
+        10.0.0.1: Reserved by AWS for the VPC router.
+        10.0.0.2: Reserved by AWS for Amazon DNS server.
+        10.0.0.3: Reserved by AWS for future use.
+        10.0.15.255: Network broadcast address.
+
+        -> Useable Range : 10.0.0.4 - 10.0.15.254v
+
+    -> Most Popular Applications
+        
+        https://en.wikipedia.org/wiki/Programming_languages_used_in_most_popular_websites
+
+23rd Dec 2025
+=============
+
+    -> Requirement Given by EDIFY
+
+	> Edify is going to setup the LMS App environment i.e servers on AWS, 
+        their clients are from XYZ (REGION) Location
+
+	> They are gonna host Servers
+
+	> These servers are grouped into three subnets each with 4k servers
+
+	> First Subnet is for web servers, around 4k
+
+	> Second Subnet is for backend servers, around 4k
+
+	> Third Subnet is for database servers, around 4k
+
+	> In the future, they might add more number of subnets i.e cache subnets, load balancer subnet etc
+
+	> The web servers and app servers needs to be communicated from internet
+
+	> The database servers needs to be communicated only from App Servers, but not from internet
+    
+	> Coming to security of Web Servers, they should have only 
+		> SSH traffic enabled for administration from internet
+		> HTTP traffic for clients from internet
+
+	> Coming to security of App Servers, they should have only 
+		> SSH traffic enabled for administration from internet
+		> HTTP traffic port 8080 for clients from internet
+
+	> Coming to security of Database Servers, they should have only SSH access from app servers
+		> SSH traffic enabled from web servers only
+		> Postgres Database Traffic Allowed from App Servers
+
+
+    -> Earlier we had our infrastructure setup using Graphical User Interface (GUI) (Beginner) 
+
+        -> Created Edify VPC(web, backend, database) using GUI took 45 mins 
+        -> New Req: TCS VPC(web, backend, database) using GUI took 45 mins 
+        -> New Req: ACC VPC(web, backend, database) using GUI took 45 mins 
+
+    -> We can also setup infrastructure using Command Line Interface (CLI) (Intermediate)
+
+        -> Created Edify VPC(web, backend, database) using CLI took 45 mins
+        -> New Req: TCS VPC(web, backend, database) using CLI took 15 mins 
+        -> New Req: ACC VPC(web, backend, database) using CLI took 15 mins 
+
+    -> We can also setup infrastructure using Code (SCRIPTS) (ultimate) (Pro)
+
+        -> Created Edify VPC(web, backend, database) using Code took 45 mins
+        -> New Req: TCS VPC(web, backend, database) using Code took 2 mins 
+        -> New Req: ACC VPC(web, backend, database) using Code took 2 mins 
+
+
+24th Dec 2025
+=============
+
+    -> The AWS Command Line Interface (CLI) is a unified tool to manage your AWS services. 
+    
+        -> Refer https://aws.amazon.com/cli/
+
+        -> https://docs.aws.amazon.com/cli/latest/
+
+    -> Commands To Work With VPC
+
+        1  aws
+        2  aws ec2 help
+        3  aws ec2 create-vpc 
+        4  aws ec2 create-vpc --cidr-block 192.168.0.0/16
+        5  aws ec2 create-tags --resources vpc-0c093881b6ad44226 --tags Key=Name,Value=lms
+        6  aws ec2 create-subnet -vpc-id vpc-0c093881b6ad44226 --cidr-block 192.168.0.0/24
+        7  aws ec2 create-subnet --vpc-id vpc-0c093881b6ad44226 --cidr-block 192.168.0.0/24
+        8  aws ec2 create-tags --resources subnet-017e60938631a26ee --tags Key=Name,Value=lms-pub-subnet
+        9  aws ec2 create-subnet --vpc-id vpc-0c093881b6ad44226 --cidr-block 192.168.1.0/24
+        10  aws ec2 create-tags --resources subnet-05a02b5798d7125fa --tags Key=Name,Value=lms-pvt-subnet
+        11  aws ec2 modify-subnet-attribute --subnet-id subnet-017e60938631a26ee --map-public-ip-on-launch
+        12  aws ec2 create-tags --resources rtb-027f5c6f6c1492f48 --tags Key=Name,Value=lms-pvt-route
+        13  aws ec2 create-route-table --vpc-id vpc-0c093881b6ad44226
+        14  aws ec2 create-tags --resources rtb-05af43a14ab225da7 --tags Key=Name,Value=lms-pub-route
+        15  aws ec2 associate-route-table --route-table-id rtb-05af43a14ab225da7 --subnet-id subnet-017e60938631a26ee
+        16  aws ec2 associate-route-table --route-table-id rtb-027f5c6f6c1492f48 --subnet-id subnet-05a02b5798d7125fa
+        17  aws ec2 create-internet-gateway
+        18  aws ec2 create-tags --resources igw-0eb3a53fe5f24cefd --tags Key=Name,Value=lms-internet-gateway
+        19  aws ec2 attach-internet-gateway --internet-gateway-id igw-0eb3a53fe5f24cefd --vpc-id vpc-0c093881b6ad44226
+        20  aws ec2 create-route --route-table-id rtb-05af43a14ab225da7 --destination-cidr-block 0.0.0.0/0 --gateway-id igw-0eb3a53fe5f24cefd
+        21 https://docs.aws.amazon.com/cli/latest/reference/ec2/create-network-acl.html
+        22 https://docs.aws.amazon.com/cli/latest/reference/ec2/create-network-acl-entry.html 
+        23 https://docs.aws.amazon.com/cli/latest/reference/ec2/create-security-group.html
+        24 https://docs.aws.amazon.com/cli/latest/reference/ec2/authorize-security-group-ingress.html
+
+
+29th Dec 2025
+=============
+
+    -> Infrastructure As Code (IaC)
+
+        -> Infrastructure as code is the process of managing and provisioning computer data centers 
+            through machine-readable definition files [CODE].
+
+        -> Cloud Formation Template 
+
+            -> https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-formats.html 
+
+
+30th Dec 2025
+=============
+
+    -> Server Management is done using service called EC2 
+
+    -> EC2 - Elastic Compute Cloud
+
+        -> EC2 allows users to rent virtual computers (Servers/Machines) on which 
+            you can run your own computer applications.
+
+    -> Server is a machine (computer)
+
+    -> NOTE: Server in aws is referred as EC2 Instance / Instance
+
+    -> Computer has hardware                        -> Server has Instance Type [cpu + ram]
+        i3 / i5 / 4 GB RAM etc                          t2.micro, t2.medium, t2.large etc 
+
+    -> Computer has hard disk                       -> Instance has EBS (Elastic Block) Storage
+        250 GB / 500 GB / 1 TB                          250 GB / 500 GB / 1 TB                      
+    
+    -> Computer has network                         -> Instance has VPC 
+
+    -> Compute has operating system                 -> Instance has AMI - Amazon Machine Image 
+
+    -> Computer has Authentication                  -> Instance has Authentication
+        username & password                             key pairs (public & private key)
+
+    -> Computer has applications                    -> Instance has applications
+        chrome / notepad etc                            myntra / flipkart / netflix etc 
+
+
+    -> Web Server 
+
+        -> A web server is computer software that accepts requests via HTTP 
+            to distribute web content.
+        
+        -> NGINX Web Server is popular for hosting Web Sites & Web Applications 
+
+        -> Login To Server With Key
+
+            -> ssh -i aws.pem ubuntu@3.138.172.167
+
+            -> chmod 400 aws.pem
+
+            -> ssh -i aws.pem ubuntu@3.138.172.167
+
+        -> Setup Web Server 
+
+            -> sudo apt update -y 
+            -> sudo apt install nginx -y 
+
+        -> Deploy Application 
+
+            -> Application Code - https://github.com/ravi2krishna/ecomm.git 
+
+            -> Document Root: Location where website code is hosted /var/www/html 
+
+                -> ls /var/www/html 
+                -> sudo rm -r /var/www/html/* 
+                -> ls /var/www/html 
+                -> sudo git clone https://github.com/ravi2krishna/ecomm.git /var/www/html 
+                -> ls /var/www/html 
+
+    -> Storage 
+
+        -> AWS provides three popular services for Storage
+                -> Elastic Block Store (EBS)
+                -> Elastic File System (EFS)
+                -> Simple Storage Service (S3)
+
+        -> Elastic Block Store (EBS) - Used for Server Storage (OS(ubuntu), Softwares(nginx))
+            -> It cannot be shared across multiple zones i.e multiple data centers
+        
+        -> Elastic File System (EFS) - Used for file sharing across multiple zones 
+            i.e multiple data centers, we cannot use for (OS(ubuntu), Softwares(nginx))
+            performance is very good, so the cost is higher 
+
+        -> Simple Storage Service (S3) - Used for internet storage i.e static assets 
+            i.e images, videos, documents etc (huge in size), so we need low cost storage i.e S3 
+            we cannot use for (OS(ubuntu), Softwares(nginx))
