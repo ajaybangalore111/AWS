@@ -471,3 +471,432 @@
         -> Simple Storage Service (S3) - Used for internet storage i.e static assets 
             i.e images, videos, documents etc (huge in size), so we need low cost storage i.e S3 
             we cannot use for (OS(ubuntu), Softwares(nginx))
+
+31st Dec 2025
+=============
+
+    -> Elastic Block Store (EBS) - Used for Server Storage (OS(ubuntu), Softwares(nginx))
+            -> It cannot be shared across multiple zones i.e multiple data centers
+
+    -> EBS Must have an Root Volume (OS Disk i.e Primary Disk)
+
+    -> EBS Optionally can have an Additional Volumes (Secondary Disk)
+
+    -> Based On the Zone, Volume will be created in the same zone where instance is launched
+
+
+2nd Jan 2025
+=============
+
+    -> EBS - Limitations 
+
+        -> Using EBS we cannot get the data directly across Multiple Availability Zones
+        -> Using EBS we cannot connect to MULTIPLE INSTANCES at same time 
+        -> With EBS Volumes, you can only scale up, but NO SCALING DOWN
+        -> EBS Volumes can scale only up to TB's
+
+    -> EFS - Elastic File System 
+
+        -> Amazon Elastic File System (EFS) provides a simple, scalable 
+            fully managed elastic NFS file system for AWS ec2 
+
+        -> EFS can scale to petabytes in size
+
+        -> Using EFS we can directly get the data across Multiple Availability Zones
+        
+        -> Using EFS we can connect to multiple instances at the same time
+
+        -> EFS uses port "2049" for NFS file system, not for instances
+
+        -> We cannot use EFS as a root volume
+
+        -> Using EFS 
+
+            -> https://www.royalcyber.com/wp-content/uploads/2023/05/cloud-file-storage.png
+
+            
+3rd Jan 2025
+=============
+
+    -> S3 
+
+        -> https://aws.amazon.com/s3/
+
+        -> Object storage built to retrieve any amount of data from anywhere
+
+        -> S3 Buckets
+
+            -> Data is stored in Buckets, Buckets are the main storage containers of S3.
+
+        -> S3 Objects
+
+            -> Objects are the fundamental entities stored in Amazon S3. An Object is a file.
+
+        -> You can store unlimited objects in a bucket but an object cannot exceed 5 TB
+
+        -> By default, all buckets & objects are private.
+
+        -> S3 provides high availability, Objects are redundantly stored on multiple devices 
+            across multiple facilities ( Multiple AZ's)
+
+        -> Storage Classes
+
+            -> A Storage Class represents the classification assigned to each object in S3.
+
+            -> Each storage class has different Storage cost
+            
+            -> https://aws.amazon.com/s3/storage-classes/
+
+        -> S3 Lifecycle Policy 
+
+            -> An object lifecycle policy is a set of rules that automate the 
+            transitioning of an object's storage class to a different storage class 
+            (or deletion) based on specified time intervals.
+
+        -> S3 Versioning 
+
+            -> S3 versioning is a feature to manage and store versions of an object
+
+            -> S3 versioning protects your data against accidental overrides and deletion.
+
+        -> S3 Static Web hosting
+            
+            -> You can use Amazon S3 to host a static website.
+
+
+5th Jan 2025
+=============
+
+    -> Database Storage 
+
+    -> Before Databases we need to know concepts of Security 
+
+    -> Database Often Hold Sensitive Information
+
+    -> In terms of AWS Security 
+
+        -> Identity Level - IAM Service 
+
+        -> Datacenter Level - Advance Networking concepts
+
+    -> AWS IAM 
+
+        -> AWS Identity and Access Management (IAM) is a web service that helps you 
+            "securely control access" to AWS resources.
+
+        -> IAM Users 
+        -> IAM Groups 
+        -> IAM Policies
+        -> IAM Roles 
+
+        -> IAM Users 
+
+            -> Root User: The user created when you first create your AWS account 
+                is called the "root" user -> your_name@mail.com -> registered with aws account 
+                root user has FULL rights i.e no Restrictions 
+
+            -> IAM User: represents an AWS user that you may create (in IAM), 
+                who will have "varying degrees of access"(read/write) to the AWS account.
+                By default IAM users will not have any permissions.
+                IAM Users can access aws resources using 
+
+                    -> AWS Management Console: Human Based with Browser Login - username & password 
+
+                    -> AWS Programmatic Access: Softwares & Tools Based Login - access & secret key  
+
+            -> IAM Policy
+
+                -> A policy is an object in AWS that defines permissions. 
+
+
+6th Jan 2025
+=============
+
+    -> Custom Policy: A policy created by user based on custom requirements 
+
+    -> IAM Group: It's an logical collection of IAM Users, used for organizing 
+            permissions in easy way.
+
+    
+7th Jan 2025
+=============
+
+    -> Security For Instances
+
+        -> So when we are talking about "increased security", what we want to focus on is, 
+            placing of EC2 instances that are holding our data in "private subnets".
+            
+        -> However this causes some issues
+
+            -> We cannot serve traffic from private instances as there is no route 
+            to the open internet and also we cannot access or ssh into 
+            EC2 instances that are in private subnets
+
+                -> Solution for above is - Bastion Server / Jump Server 
+
+            -> We cannot install/update the software on those Private EC2 instances.
+
+                -> NAT Gateway / Natting 
+
+        -> Bastion Host / Server 
+
+            -> A Bastion Host is an EC2 instance that lives in a public subnet, 
+            and is used as a "gateway" for traffic that is destined for instances 
+            that live in private subnets.
+
+            -> A bastion host acts as a "portal" to access EC2 instances 
+            that are located in a private subnet.
+
+8th Jan 2025
+=============
+
+    -> NAT Gateway 
+
+        -> NAT Gateway allows resources in a private subnet to access the internet for
+        (system updates, external database connections, wget calls, OS patch, etc).
+
+        -> https://i.sstatic.net/2ihm3.png
+
+9th Jan 2025
+=============
+
+    -> Database Storage - IAAS - You are responsible 
+
+        -> Preparing VPC 
+        -> Preparing Private Subnets 
+        -> Preparing Bastion Host 
+        -> Preparing NAT Gateway 
+
+        -> Setup EC2 Database Server 
+        -> Install OS 
+        -> Update OS + Patches 
+        -> Download Database Software - MySQL  
+        -> Update Database Software - MySQL  
+        -> Backup Database 
+
+        -> NOTE: Once Database Server is setup, then Developer will use 
+            Database connection details in Application
+
+                -> Database connection details
+
+                    -> Address Of Database 
+                    -> Port Of Database
+                    -> Username Of Database
+                    -> Password Of Database
+
+
+    -> Database Storage - PAAS - AWS is responsible for all infra activities 
+            from Preparing VPC to Backup Database 
+
+        -> You are responsible for connecting Database with Application
+
+                -> Database connection details
+
+                    -> Address Of Database 
+                    -> Port Of Database
+                    -> Username Of Database
+                    -> Password Of Database
+
+    -> RDS 
+
+        -> Managed Relational Database Service
+
+            -> Earlier Server As a Service (EC2)
+            -> Earlier Storage As a Service (S3)
+            -> Now Database As a Service (RDS)
+
+        -> Database connection details
+
+            -> Address Of Database: my-app.cxwgqscew38a.us-east-2.rds.amazonaws.com 
+            -> Port Of Database: 3306
+            -> Username Of Database: admin
+            -> Password Of Database: **************
+        
+10th Jan 2025
+=============
+
+    -> PAAS - MySQL Database (RDS)
+
+    -> IAAS - Tomcat Server (EC2)
+
+        -> Tomcat Setup 
+
+            -> sudo ss -ntpl
+
+            -> java 
+
+            -> sudo apt update -y 
+            
+            -> sudo apt install openjdk-11* -y
+
+            -> java 
+
+            -> ls
+            
+            -> wget https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.94/bin/apache-tomcat-7.0.94.tar.gz
+
+            -> tar xf apache-tomcat-7.0.94.tar.gz
+
+            -> ls 
+
+            -> sudo ss -ntpl
+
+            -> ~/apache-tomcat-7.0.94/bin/startup.sh 
+
+            -> sudo ss -ntpl
+
+            -> Browse Public-IP:8080 
+
+            -> Browse Public-IP:8080/LoginWebApp 
+
+        
+        -> Setup Application On Tomcat & Connect With Database 
+
+            -> ls 
+            
+            ->  git clone -b aws https://github.com/ravi2krishna/aws-rds-java.git 	
+
+            -> ls 
+
+            -> Update DB Security Group with Java-App-Server Private IP 
+
+            -> Install MySQL Client On Java-App-Server (for establishing connection)
+
+                -> mysql
+
+                -> sudo apt install mysql-client-core-8.0 -y
+
+                -> mysql
+
+                -> mysql -h rds-end-point -u username -p 
+
+                -> mysql -h my-app.cxwgqscew38a.us-east-2.rds.amazonaws.com -u admin -p 
+
+                -> SHOW DATABASES;
+
+                -> CREATE DATABASE jwt;
+
+                -> SHOW DATABASES;
+
+                -> USE jwt; 
+
+                -> SHOW TABLES;
+
+                CREATE TABLE `USER` (
+                `id` int(10) unsigned NOT NULL auto_increment,
+                `first_name` varchar(45) NOT NULL,
+                `last_name` varchar(45) NOT NULL,
+                `email` varchar(45) NOT NULL,
+                `username` varchar(45) NOT NULL,
+                `password` varchar(45) NOT NULL,
+                `regdate` date NOT NULL,
+                PRIMARY KEY (`id`)
+                ) ENGINE = InnoDB DEFAULT CHARSET = latin1;	   
+
+                -> SHOW TABLES;
+
+                -> DESC USER;
+
+                -> SELECT * FROM USER;
+
+            -> Open a new session for Application Code Changes 
+
+                -> cd aws-rds-java
+
+                -> vi src/main/webapp/userRegistration.jsp
+                    
+                    Change database address & credentials
+
+                -> vi src/main/webapp/login.jsp
+
+                    Change database address & credentials
+
+                -> Build Application 
+
+                    -> mvn package 
+
+                    -> sudo apt install maven -y
+
+                    -> ls target 
+
+                    -> mvn package
+
+                    -> ls target 
+
+                -> Deploy Application On Tomcat 
+
+                    -> Browse Public-IP:8080/LoginWebApp 
+
+                    -> cp ~/aws-rds-java/target/LoginWebApp.war ~/apache-tomcat-7.0.94/webapps/
+
+                    -> Browse Public-IP:8080/LoginWebApp 
+
+                
+12th Jan 2025
+=============
+
+    -> PAAS - MySQL Database (RDS)
+
+    -> PAAS - Tomcat Server (Elastic Beanstalk)
+
+    -> SAAS - Completely vendor will take care 
+
+        -> Say i need monitoring solution 
+
+            -> We need to manually setup in IAAS 
+
+                -> https://assets.nagios.com/training/selfpaced/materials/Nagios_StartUp_Guide.pdf
+
+            -> Cloudwatch - Monitoring As Service
+
+                -> Monitor your Server for Metrics (CPU)
+
+                    -> If cpu of server is beyond 90%, send an email 
+
+            -> SimpleNotificationService(SNS) - Feedback As Service
+
+                -> If cpu of server is beyond 90%, then SNS will send email 
+
+    -> Login To Server 
+
+        -> sudo apt update -y && sudo apt install stress -y
+
+        -> stress --cpu 1 --timeout 10000 &
+
+
+13th Jan 2025
+=============
+
+    -> Application should have following characteristics (Four Pillars Of Cloud)
+
+        -> Highly Available 
+
+            -> High availability in AWS ensures that applications are 
+                continuously accessible and operational
+
+                -> Use Multiple Availability Zones To Host Application 
+
+                -> Use Load Balancer To Route the Traffic Over Multiple Availability Zones for Failover 
+
+        -> Fault Tolerant 
+
+            -> Fault tolerance in AWS refers to the ability of a system to 
+                continue operating without interruption in the face of hardware failures
+
+                -> Self healing needs to be implemented 
+
+                -> Auto Scaling with Load Balancer Integration
+
+        -> Scalable  
+
+            -> Scalability in AWS refers to the ability of a system to handle 
+                increasing workloads and accommodate growing demands. 
+
+                -> Based on loads automatically Scale Up & Scale Down resources 
+
+                -> Cloudwatch + Dynamic Scaling Rules 
+
+            -> Security in AWS refers to the measures taken to protect cloud resources, 
+                data, and applications from unauthorized access.
+
+                    -> Use IAM Users, Policy, Roles, Security Groups, NACL's etc 
